@@ -1,0 +1,24 @@
+configuration {
+	modi: "drun, run,window";
+	show-icons: true;
+	terminal: "kitty";
+	font: "ShureTechMono Nerd Font Mono 12";
+	icon-theme: "kora";
+	 drun {
+    display-name: "";
+  }
+
+  run {
+    display-name: "";
+  }
+
+  window {
+    display-name: "";
+  }
+
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
+}
+@theme "~/.config/rofi/theme2.rasi"
