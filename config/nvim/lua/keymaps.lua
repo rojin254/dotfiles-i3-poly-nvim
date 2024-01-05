@@ -1,3 +1,4 @@
+
 vim.g.mapleader = " "
 
 
@@ -22,3 +23,14 @@ vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")     --
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")     -- quickfix options
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz") --
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") --
+
+
+vim.keymap.set("n","<C-left>",":bp<CR>") --previous buffer
+vim.keymap.set("n","<C-right>",":bn<CR>") -- next buffer
+
+vim.keymap.set("n","<A-S-left>","<C-W>h")
+vim.keymap.set("n","<A-S-right>","<C-W>l")
+vim.keymap.set("n","<A-S-down>","<C-W>j")
+vim.keymap.set("n","<A-S-up>","<C-W>k")
+
+
