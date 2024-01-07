@@ -1,4 +1,5 @@
 return {
+
     {
         "williamboman/mason.nvim",
 
@@ -28,7 +29,6 @@ return {
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
-
             lspconfig.tsserver.setup({
                 capabilities = capabilities,
             })
@@ -44,14 +44,26 @@ return {
             --  ['rust-analyzer'] = {}
             --}
             --})
+            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
-            vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, {})
-            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-            vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, {})
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-        end,
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                callback = function(ev)
+                    -- Enable completion triggered by <c-x><c-o>
+                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+                    local opts = { buffer = ev.buf }
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover,opts)
+                    vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration,opts)
+                    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition,opts)
+                    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references,opts)
+                    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation,opts)
+                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,opts)
+                    vim.keymap.set('n', '<leader>gh', vim.lsp.buf.signature_help, opts)
+                end
+        })
+        end
     },
 }

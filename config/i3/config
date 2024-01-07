@@ -14,7 +14,7 @@ set $mod Mod4
 
 
 # gaps
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 1
 #gaps inner 1px
 #gaps outer 0
 smart_borders on
@@ -42,6 +42,16 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+#Lock screen from lock.sh
+exec --no-startup-id xautolock -time 15 -locker "/home/$USER/.config/i3/scripts/lock.sh"
+exec --no-startup-id xautolock -time 30 -locker "/home/$USER/.config/i3/scripts/lock.sh && systemctl suspend"
+
+# manuel lockscreen && suspend session
+bindsym $mod+l exec bash ~/.config/i3/scripts/lock.sh 
+
+# rofi sysmenu shortcut
+bindsym $mod+x exec bash ~/.config/polybar/scripts/sysmenu.sh & 
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -72,12 +82,6 @@ bindsym $mod+Shift+d exec "rofi -modi run -show run"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
-
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -203,9 +207,9 @@ bindsym $mod+r mode "resize"
 
 
 # class                 border  bground text    indicator child_border
-client.focused          #6d98e8 #12121F #D4D7FF #6d98e8   #837dd7
-client.focused_inactive #D4D7FF #12121F #D4D7FF #D4D7FF   #E4E7FF
-client.unfocused        #E4E7FF #222236 #29293f #E4E7FF   #F4F7FF
+client.focused          #4fd6be #12121F #4fd6be #6d98e8   #4fd6be
+client.focused_inactive #12121f #12121F #f4f7ff #D4D7FF   #12121f
+client.unfocused        #12121f #222236 #12121F #E4E7FF   #12121f
 client.urgent           #d95177 #d54c73 #D4D7FF #EF4A73   #d54c73
 client.placeholder      #12121F #12121F #D4D7FF #12121F   #222236
 
@@ -221,5 +225,10 @@ client.background       #12121F
 #}
 
 exec_always ~/.config/polybar/launch.sh &
-exec_always feh --bg-fill ~/Pictures/Wallpapers/nord-shards.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/geisha_original.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/heart_original.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/tokyonight_original.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/undead_love.png
+exec_always feh --bg-fill ~/Pictures/Wallpapers/undead_love2.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/void_original.png
 exec picom --experimental-backends --backend glx
